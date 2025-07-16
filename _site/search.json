@@ -236,5 +236,12 @@
     "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
     "section": "Welcome",
     "text": "Welcome\nAbout me\n\nJason Locklin\nData Science Lead\nToronto Catholic District School Board\n\n\nGood morning, everyone. My name is Jason Locklin, and I’m the Data Science Lead at the Toronto Catholic District School Board. I’m excited to be here today to talk about a project that I believe has significant potential for all of us in Ontario’s education sector. My goal is to give you a technical preview of a self-hosted survey platform called surveydown."
+  },
+  {
+    "objectID": "index.html#self-host",
+    "href": "index.html#self-host",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Self-Host?",
+    "text": "Self-Host?\nFor school boards, this isn’t just a technical decision—it’s a strategic one.\n\nData Governance & Sovereignty:\nCost Savings:\nCustomization & Collaboration:\nNo Vendor Lock-in:\n\n\nSo, why go to the trouble of self-hosting? The reasons are compelling for us in school boards. It’s about data sovereignty and security—keeping our sensitive data on our own servers. It’s about significant cost savings over commercial platforms. And it’s about control—the freedom to customize our tools and avoid being locked into a specific vendor’s ecosystem.\n\nData Governance & Sovereignty: Keep student and staff data on your own infrastructure, under your control.\nCost Savings: Avoid annual subscription fees for survey platforms.\nCustomization & Collaboration: Full control over the survey’s functionality and appearance as shareable R source.\nNo Vendor Lock-in: Freedom to adapt and evolve your tools as your needs change."
   }
 ]

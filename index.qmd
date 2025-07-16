@@ -106,17 +106,23 @@ Based on their blog and documentation, the authors of `surveydown` have a clear 
 `surveydown` is a young but rapidly maturing project. It's being actively developed, with the authors recently releasing a major update that improved the underlying architecture. While their excellent documentation primarily focuses on using cloud services for hosting, my project aims to fill a gap by providing a clear, reproducible pattern for self-hosting on our own infrastructure.
 :::
 
-## Why Self-Host?
+## Self-Host?
 
 For school boards, this isn't just a technical decision—it's a strategic one.
+
+-   **Data Governance & Sovereignty:** 
+-   **Cost Savings:** 
+-   **Customization & Collaboration:** 
+-   **No Vendor Lock-in:** 
+
+::: {.notes}
+So, why go to the trouble of self-hosting? The reasons are compelling for us in school boards. It's about data sovereignty and security—keeping our sensitive data on our own servers. It's about significant cost savings over commercial platforms. And it's about control—the freedom to customize our tools and avoid being locked into a specific vendor's ecosystem.
 
 -   **Data Governance & Sovereignty:** Keep student and staff data on your own infrastructure, under your control.
 -   **Cost Savings:** Avoid annual subscription fees for survey platforms.
 -   **Customization & Collaboration:** Full control over the survey's functionality and appearance as shareable R source.
 -   **No Vendor Lock-in:** Freedom to adapt and evolve your tools as your needs change.
 
-::: {.notes}
-So, why go to the trouble of self-hosting? The reasons are compelling for us in school boards. It's about data sovereignty and security—keeping our sensitive data on our own servers. It's about significant cost savings over commercial platforms. And it's about control—the freedom to customize our tools and avoid being locked into a specific vendor's ecosystem.
 :::
 
 ## Section 2: Creating a Survey in `surveydown`
