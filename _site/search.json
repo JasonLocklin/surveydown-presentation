@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "index.html#who-am-i",
+    "href": "index.html#who-am-i",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Who Am I?",
+    "text": "Who Am I?\n\nJason Locklin\nData Science Lead\nToronto Catholic District School Board\n\n\nGood morning, everyone. My name is Jason Locklin, and I’m the Data Science Lead at the Toronto Catholic District School Board. I’m excited to be here today to talk about a project that I believe has significant potential for all of us in Ontario’s education sector. My goal is to give you a technical preview of a self-hosted survey platform called surveydown."
+  },
+  {
+    "objectID": "index.html#section-1-what-is-surveydown",
+    "href": "index.html#section-1-what-is-surveydown",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Section 1: What is surveydown?",
+    "text": "Section 1: What is surveydown?\nSurveydown is n open-source, markdown-based platform for programmable and reproducible surveys using R, Quarto, Shiny, and a PostgreSQL database.\n\nHelveston J, Hu P, Bunea B (2024). surveydown: Markdown-Based Surveys Using Quarto And Shiny. R package, https://surveydown.org/."
+  },
+  {
+    "objectID": "index.html#the-surveydown-ecosystem",
+    "href": "index.html#the-surveydown-ecosystem",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The surveydown Ecosystem",
+    "text": "The surveydown Ecosystem\nsurveydown combines familiar tools from the R world to create a powerful survey platform.\n\n\n\n\n\ngraph TD\n    subgraph \"Core Technologies\"\n        R(R Language&lt;br&gt;The Foundation)\n        Quarto(Quarto&lt;br&gt;The Authoring System)\n        Shiny(Shiny&lt;br&gt;The Interactive Engine)\n    end\n    \n    Quarto -- uses R code chunks --&gt; R\n    Shiny -- is an R package --&gt; R\n    \n    subgraph \"The Result\"\n        Survey[Live Interactive Survey]\n    end\n\n    Quarto & Shiny -- combined by surveydown --&gt; Survey\n\n    style R fill:#276DC2,stroke:#fff,stroke-width:2px,color:#fff\n    style Quarto fill:#4B4B4B,stroke:#fff,stroke-width:2px,color:#fff\n    style Shiny fill:#1E83C8,stroke:#fff,stroke-width:2px,color:#fff\n    style Survey fill:#75A834,stroke:#fff,stroke-width:2px,color:#fff\n\n\n\n\n\n\n\nBefore we dive into surveydown itself, let’s look at the technology it’s built on. As this diagram shows, it sits on three pillars many of you already know: R is the foundation, Quarto provides the structure for writing the survey, and Shiny brings it to life as an interactive web app. surveydown is the glue that intelligently combines these pieces, letting you focus on the survey’s content."
+  },
+  {
+    "objectID": "index.html#why-self-host",
+    "href": "index.html#why-self-host",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Why Self-Host?",
+    "text": "Why Self-Host?\nFor school boards, this isn’t just a technical decision—it’s a strategic one.\n\nData Governance & Sovereignty: Keep student and staff data on your own infrastructure, under your control.\nCost Savings: Avoid annual subscription fees for survey platforms.\nCustomization & Collaboration: Full control over the survey’s functionality and appearance as shareable R source.\nNo Vendor Lock-in: Freedom to adapt and evolve your tools as your needs change.\n\n\nSo, why go to the trouble of self-hosting? The reasons are compelling for us in school boards. It’s about data sovereignty and security—keeping our sensitive data on our own servers. It’s about significant cost savings over commercial platforms. And it’s about control—the freedom to customize our tools and avoid being locked into a specific vendor’s ecosystem."
+  },
+  {
+    "objectID": "index.html#surveydown-development-status",
+    "href": "index.html#surveydown-development-status",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "surveydown: Development Status",
+    "text": "surveydown: Development Status\n\nThe package should be considered alpha software, with frequent updates.\nA recent major update (v0.3.0) redesigned the app architecture for better performance and flexibility.\nThe official documentation focuses on free cloud deployment (e.g., shinyapps.io, Supabase).\nThis is where my project comes in: to provide a straightforward path to self-hosting.\n\n\nsurveydown is a young but rapidly maturing project. It’s being actively developed, with the authors recently releasing a major update that improved the underlying architecture. While their excellent documentation primarily focuses on using cloud services for hosting, my project aims to fill a gap by providing a clear, reproducible pattern for self-hosting on our own infrastructure."
+  },
+  {
+    "objectID": "index.html#section-2-creating-a-survey-in-surveydown",
+    "href": "index.html#section-2-creating-a-survey-in-surveydown",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Section 2: Creating a Survey in surveydown",
+    "text": "Section 2: Creating a Survey in surveydown"
+  },
+  {
+    "objectID": "index.html#the-authoring-workflow",
+    "href": "index.html#the-authoring-workflow",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Authoring Workflow",
+    "text": "The Authoring Workflow\nCreating a survey follows a simple, logical path from a text file to a live application.\n\nStart with a survey.qmd file\n\nWrite Markdown for text\n\nAdd R code chunks for any calculations\nUse sd_question() to define questions\n\nSet type, id, label, options…\n\nRender with Quarto and surveydown\n\nResult: Live Shiny Surveydown app\n\n\nLet’s walk through how you actually build a survey. This diagram shows the workflow. It all starts with a single Quarto file. In this file, you’ll write standard Markdown for your text and instructions, and then you’ll add R code chunks where you define your questions using the sd_question function. Once you’re done, surveydown processes this file and automatically generates a fully functional Shiny web application."
+  },
+  {
+    "objectID": "index.html#the-survey.qmd-file",
+    "href": "index.html#the-survey.qmd-file",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The survey.qmd File",
+    "text": "The survey.qmd File\nA surveydown survey starts as a simple Quarto (.qmd) file.\n---\ntitle: \"My First Survey\"\n---\n\nWelcome to my survey!\n\n\\```{r}\n# Questions go here in R code chunks (no '\\')\n\\```\n\nThank you for participating.\n\nThis is what that survey.qmd file looks like in its simplest form. It has a YAML header for the title, some markdown text for the introduction, a placeholder for our R code chunks, and a concluding message. It’s a plain text file, which is great for version control with tools like Git."
+  },
+  {
+    "objectID": "index.html#the-core-sd_question",
+    "href": "index.html#the-core-sd_question",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Core: sd_question()",
+    "text": "The Core: sd_question()\nEvery individual survey item is created with the sd_question() function.\n# A simple multiple-choice question\nsd_question(\n  type  = 'mc',\n  id    = 'fav_fruit',\n  label = 'What is your favorite fruit?',\n  option = c('Apple', 'Banana', 'Orange')\n)\n\nThe workhorse of surveydown is the sd_question() function. This single function is used to create all types of questions. At a minimum, you need to provide the type of question, a unique id for that question so you can identify it in the data later, and the label, which is the question text the user sees."
+  },
+  {
+    "objectID": "index.html#a-variety-of-question-types",
+    "href": "index.html#a-variety-of-question-types",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "A Variety of Question Types",
+    "text": "A Variety of Question Types\nsurveydown supports many common question types.\nText Input: sd_question(type = 'text', ...)\nNumeric Input: sd_question(type = 'numeric', ...)\nLikert Scale: sd_question(type = 'likert', ...)\nAnd more: surveydown.org/docs/question-types\n\nsurveydown supports a wide range of inputs. You can create free-form text questions, number inputs, and Likert scales, which are very common in our line of work. The structure is always the same: sd_question() with the appropriate type."
+  },
+  {
+    "objectID": "index.html#making-questions-required",
+    "href": "index.html#making-questions-required",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Making Questions Required",
+    "text": "Making Questions Required\nYou can force a user to answer a question by setting required = TRUE.\nsd_question(\n  type    = 'mc',\n  id      = 'consent',\n  label   = 'Do you consent to participate in this survey?',\n  option  = c('Yes', 'No'),\n  required = TRUE\n)\nThe survey will not advance until a required question is answered.\n\nOf course, sometimes you need to ensure a question is answered. You can do this easily by adding the argument required = TRUE to any question. If a user tries to proceed without answering, they’ll be prompted to provide a response. This is essential for things like consent forms or key demographic questions."
+  },
+  {
+    "objectID": "index.html#the-power-of-r-dynamic-questions",
+    "href": "index.html#the-power-of-r-dynamic-questions",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Power of R: Dynamic Questions",
+    "text": "The Power of R: Dynamic Questions\nBecause the survey is just R code, you can use R to dynamically generate content. For example, you can randomize the order of options.\n# These options will be in a different order for each participant\nrandom_options &lt;- sample(c('Apple', 'Banana', 'Orange'))\n\nsd_question(\n  type   = 'mc',\n  id     = 'fav_fruit_random',\n  label  = 'What is your favorite fruit?',\n  option = random_options\n)\n\nHere’s where surveydown really shines and separates itself from point-and-click tools. Because you’re in an R environment, you can write R code to programmatically create your survey. In this example, I’m using the sample() function to randomize the order of the fruit options. This is a simple but powerful technique to reduce bias in responses. The possibilities are endless—you could pull question text from a database, create customized questions based on a user’s previous answers, and much more."
+  },
+  {
+    "objectID": "index.html#low-code-options-rstudio-addins",
+    "href": "index.html#low-code-options-rstudio-addins",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Low-Code Options: RStudio Addins",
+    "text": "Low-Code Options: RStudio Addins\nsurveydown includes RStudio “gadgets” that provide a graphical interface for building questions, making it accessible even for those with less coding experience.\n\nPlaceholder for RStudio Addin Screenshot\nTo make surveydown even more accessible, the developers have included RStudio addins, or “gadgets.” These are interactive graphical interfaces that guide you through creating different question types. You can fill out a form, and the gadget will generate the necessary surveydown code for you. This significantly lowers the barrier to entry and allows staff with a wide range of technical skills to build surveys."
+  },
+  {
+    "objectID": "index.html#section-3-my-self-hosting-project",
+    "href": "index.html#section-3-my-self-hosting-project",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Section 3: My Self-Hosting Project",
+    "text": "Section 3: My Self-Hosting Project"
+  },
+  {
+    "objectID": "index.html#a-containerized-solution",
+    "href": "index.html#a-containerized-solution",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "A Containerized Solution",
+    "text": "A Containerized Solution\nMy project uses Docker to package everything needed to run surveydown into a portable, self-contained system.\n\n\n\n\nDocker\n\n\n\n\n\nShiny Server\n\n\n\n\n\nPostgreSQL\n\n\n\n\n\nCaddy\n\n\n\n\nNow, let’s get to the technical core of my project. I’ve created a setup that uses Docker to containerize all the necessary components. For those unfamiliar with Docker, think of it as a way to package an application and its dependencies into a standardized unit for software development. This project bundles Shiny Server, a PostgreSQL Database, and the Caddy Reverse Proxy."
+  },
+  {
+    "objectID": "index.html#architecture-overview",
+    "href": "index.html#architecture-overview",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Architecture Overview",
+    "text": "Architecture Overview\nThis diagram shows how the included components interact in the demo setup.\n\n\n\n\n\ngraph LR\n    User[Survey Taker] -- HTTPS --&gt; Caddy{Caddy Reverse Proxy&lt;br&gt;SSL & Routing};\n    Caddy -- routes traffic --&gt; Shiny[Shiny Server&lt;br&gt;hosts surveydown apps];\n    Shiny &lt;--&gt; DB[(PostgreSQL DB&lt;br&gt;stores responses)];\n    \n    subgraph \"Automated Data Export\"\n        direction LR\n        DB -- R script queries --&gt; Parquet[Parquet Files];\n    end\n\n    Analyst[Data Analyst] -- HTTPS --&gt; Caddy;\n    Caddy -- serves password-protected files --&gt; Analyst;\n    Parquet -- served by --&gt; Caddy;\n    \n    style User fill:#D6EAF8,stroke:#2E86C1\n    style Analyst fill:#D5F5E3,stroke:#28B463\n    style Caddy fill:#FCF3CF,stroke:#F1C40F\n    style Shiny fill:#FADBD8,stroke:#E74C3C\n    style DB fill:#EBDEF0,stroke:#8E44AD\n\n\n\n\n\n\n\nHere’s the full architecture of the demonstration project. A user connects securely to the Caddy server. Caddy routes the request to the Shiny Server, which runs the survey. Responses are saved in the PostgreSQL database. In the background, a script automatically exports this data, and an analyst can securely download it for analysis."
+  },
+  {
+    "objectID": "index.html#getting-started-is-easy",
+    "href": "index.html#getting-started-is-easy",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Getting Started is Easy",
+    "text": "Getting Started is Easy\nThree steps to a running survey platform:\n\nPull down the project from the git repository. git clone &lt;repo_url&gt;\nEdit a few configuration files to set your domain name and passwords.\nRun one command to start everything up. docker-compose up -d\n\nThat’s it. You have a fully functional, secure survey platform.\n\nThe goal of this project was to make self-hosting as straightforward as possible. You don’t need to be a systems administrator to get this running. You simply pull down the repository, edit a couple of text files, and run a single command. Docker Compose handles the rest, building and connecting all the containers automatically."
+  },
+  {
+    "objectID": "index.html#live-demo",
+    "href": "index.html#live-demo",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Live Demo",
+    "text": "Live Demo\nI have this setup running right now on a $5/month virtual private server from OVH in Montreal.\n\nStandard Shiny Landing Page: https://shiny.locklin.science\nSurveyDown Templates: https://shiny.locklin.science/templates\nDemo R Quiz for Today: https://shiny.locklin.science/survey\n\n\nTo demonstrate how practical this is, I have a live demo running on a very low-cost, $5-per-month virtual server. You can visit these URLs right now. This entire setup, running multiple apps and a database, is handled by one of the cheapest servers you can rent.\nNote that: the templates are individual applications and take a long time to start the first time they are opened on the server."
+  },
+  {
+    "objectID": "index.html#the-future-potential",
+    "href": "index.html#the-future-potential",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Future Potential",
+    "text": "The Future Potential\n\nA centralized, board-owned platform for all survey needs.\nEmpower researchers to create and collaborate on surveys.\nIntegrate survey data directly into your existing data warehouses and analytics workflows.\nBuild a community of practice around open-source tools in education.\n\n\nSo, what’s the big picture? I envision boards using their existing on-premise infrastructure to host a platform like this. It could become a centralized service for all departments. We can empower our colleagues to collect the data they need while ensuring that data remains secure and under our control, and we can build a community of practice around powerful, open-source tools like R, Quarto, and Docker."
+  },
+  {
+    "objectID": "index.html#questions",
+    "href": "index.html#questions",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Questions?",
+    "text": "Questions?\nThank You!\n\nProject Repo: https://github.com/JasonLocklin/surveydown-container-server\nSurveydown https://surveydown.org/\nSurveyDown Templates: https://shiny.locklin.science/templates\nDemo R Quiz for Today: https://shiny.locklin.science/survey\n\n\nThat concludes my technical preview. I hope this has given you a sense of what’s possible with surveydown and a self-hosted approach. I’d be happy to answer any questions you have."
+  },
+  {
+    "objectID": "index.html#the-foundation-what-is-shiny",
+    "href": "index.html#the-foundation-what-is-shiny",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Foundation: What is Shiny?",
+    "text": "The Foundation: What is Shiny?\nShiny is an R package that builds interactive web applications directly from R.\n\nYou write R code.\nShiny turns it into an interactive website with buttons, sliders, plots, and more.\nNo need to learn HTML, CSS, or JavaScript.\nIt’s the engine that makes surveydown interactive.\n\n\nBefore we can talk about surveydown, we need to understand its engine: Shiny. For those who haven’t used it, Shiny is a powerful package from Posit that allows us to build interactive web applications without leaving the R environment we’re comfortable with. It’s what takes our data analysis and turns it into a tool that others can use, and it’s the magic that will power our live surveys."
+  },
+  {
+    "objectID": "index.html#the-bridge-what-is-surveydown",
+    "href": "index.html#the-bridge-what-is-surveydown",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Bridge: What is surveydown?",
+    "text": "The Bridge: What is surveydown?\nsurveydown is an R package that acts as a bridge, connecting a simple document to a powerful interactive system.\n\nYou write a Quarto document with questions\nShiny runs the application for interactivity on the web\nData is collected in the database, and you export that for analysis\n\n\nSo, what is surveydown? It’s the specialized tool that connects the document-writing world of Quarto with the interactive world of Shiny. You write your survey questions in a simple document, and surveydown does the heavy lifting of converting that into a full-fledged Shiny application and setting up the connection to a database to store the responses."
+  },
+  {
+    "objectID": "index.html#surveydown-project-goals",
+    "href": "index.html#surveydown-project-goals",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "surveydown: Project Goals",
+    "text": "surveydown: Project Goals\nThe surveydown project, according to its developers, has clear goals:\n\nEase of Use:\nPerformance:\nFlexibility:\nOpen Source:\n\n\nBased on their blog and documentation, the authors of surveydown have a clear vision. They want to create a tool that is not only easy to use for R practitioners but also performant enough for real-world data collection. They emphasize flexibility, showing off advanced use cases, and most importantly, it’s a completely open-source project, which aligns perfectly with the needs of the public sector.\n\nEase of Use: Make survey creation in R simple and intuitive.\nPerformance: Ensure surveys are fast and can handle many concurrent users (with the right hosting).\nFlexibility: Allow for everything from simple questionnaires to complex, dynamic designs like conjoint analysis.\nOpen Source: Provide a free, transparent, and community-driven alternative to proprietary platforms that can be run on your own infrastructure."
+  },
+  {
+    "objectID": "index.html#the-goal-make-self-hosting-simple",
+    "href": "index.html#the-goal-make-self-hosting-simple",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Goal: Make Self-Hosting Simple",
+    "text": "The Goal: Make Self-Hosting Simple\nThe main challenge with self-hosting is complexity. My project aims to solve this by providing a simple, repeatable template using containers."
+  },
+  {
+    "objectID": "index.html#why-use-containers-docker",
+    "href": "index.html#why-use-containers-docker",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Why Use Containers (Docker)?",
+    "text": "Why Use Containers (Docker)?\nThink of a container like a standardized shipping container for software.\n\nIt packages an application and all its dependencies (R, packages, system libraries) into one neat box.\nThis “box” runs the same way everywhere: on your laptop, on a server in your board’s data center, or in the cloud.\nIt solves the “it works on my machine” problem.\n\nThis makes deployment predictable and easy.\n\nSo, let’s talk about the self-hosting project. The biggest barrier is often the technical complexity of setting up servers. My project uses a technology called Docker to simplify this. The best analogy for Docker is a shipping container. It bundles up an application, like our Shiny Server, with all its dependencies—the correct version of R, all the R packages, everything—into a single, isolated box. This box will run identically wherever you put it, which makes deployment incredibly reliable."
+  },
+  {
+    "objectID": "index.html#a-starting-point-for-your-board",
+    "href": "index.html#a-starting-point-for-your-board",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "A Starting Point for Your Board",
+    "text": "A Starting Point for Your Board\nThis project is not a final, locked-in product. It’s a demonstration and a template.\n\nFor You: Easily and cheaply demonstrate a fully working on-premise surveydown instance to your colleagues and leadership.\nFor Your IT Department: A clear, working template they can adapt for production. It shows exactly what components are needed and how they connect.\n\n\nIt’s crucial to understand what this project is and isn’t. It’s not a rigid, one-size-fits-all solution. Instead, it’s a starting point. For us, the researchers and data users, it’s a cheap and easy way to demonstrate the power of a self-hosted surveydown. For our IT departments, it’s a working template that takes the guesswork out of deployment. They can see exactly what’s needed and adapt it to fit into their existing infrastructure and security policies."
+  },
+  {
+    "objectID": "index.html#designed-for-flexibility",
+    "href": "index.html#designed-for-flexibility",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Designed for Flexibility",
+    "text": "Designed for Flexibility\nThe components in this project are “pluggable.” You can swap them out to match your board’s infrastructure.\n\nIncluded PostgreSQL database container pre-configured to work with surveydown\nIncluded web server with TLS (https://your_address.com) security and a download data url.\nA Dockerfile that builds a full-featured shiny server instance.\n\nThe Shiny Server container is the most valuable piece. You can use it to host most any Shiny app, not just surveydown.\n\nThis template is designed to be flexible. As this diagram shows, the core component is the Shiny Server container. This is the most valuable part of the package. The other parts—the Caddy web server and the PostgreSQL database—are included for convenience to make a complete, working demo. However, your IT department can easily swap these out. They can use their existing enterprise web server and connect the Shiny Server to a central database. The Shiny container itself is a reusable asset for hosting any Shiny application your team develops."
+  },
+  {
+    "objectID": "index.html#the-foundation-what-is-quarto",
+    "href": "index.html#the-foundation-what-is-quarto",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "The Foundation: What is Quarto?",
+    "text": "The Foundation: What is Quarto?\nQuarto is a program produced by Posit that produces documents that can include code from R and other languages.\nYou may have used knitr in R to produce RMarkdown notebooks. Quarto is a stand-alone replacement that can run independently of R.\n\nNote that the syntax for Quarto is only slightly changed from Rmarkdown and it’s easy to convert documents. Quarto can produce all sorts of document types, and can be used for general writing as well as literate programming of analyses.\nThese documents, however, are not interactive on their own."
+  },
+  {
+    "objectID": "index.html#survey-features",
+    "href": "index.html#survey-features",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Survey Features",
+    "text": "Survey Features\nsurveydown already supports many required features of a powerful survey platform:\n\nConditional display logic\nCustom questions and custom formatting\nTranslations (limited)\nData access for displaying “past responses”\nReactivity and Randomization\nExternal redirection\nAn administrative “dashboard” (very limited)\n\n\nDespite being very new, it is already possible to do many of the complex features of legacy survey platforms, though many are only partially implemented so far."
+  },
+  {
+    "objectID": "index.html#follow-the-surveydown-project-for-updates",
+    "href": "index.html#follow-the-surveydown-project-for-updates",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Follow the surveydown project for updates",
+    "text": "Follow the surveydown project for updates\n\nhttps://surveydown.org/blog/ (which is a quarto document!)"
+  },
+  {
+    "objectID": "index.html#section-3-my-approach-to-self-hosting-surveydown",
+    "href": "index.html#section-3-my-approach-to-self-hosting-surveydown",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Section 3: My Approach to Self-hosting surveydown",
+    "text": "Section 3: My Approach to Self-hosting surveydown"
+  },
+  {
+    "objectID": "index.html#additional-details",
+    "href": "index.html#additional-details",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Additional details",
+    "text": "Additional details\nThe shiny server container also:\n\nIs preconfigured to host the surveydown templates at /templates for testing\nCan be configured to download and host any survey from githum at /survey\nPeriodically saves the data in a password protected location /data-export that can be read directly with R."
+  },
+  {
+    "objectID": "index.html#minimal-steps-to-get-started",
+    "href": "index.html#minimal-steps-to-get-started",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Minimal steps to get started",
+    "text": "Minimal steps to get started\nThree steps to a running survey platform:\n\nSet up a host with a public DNS address\nPull down the project from the git repository. git clone https://github.com/JasonLocklin/surveydown-container-server\nEdit a few configuration files to set your domain name and passwords.\nRun one command to start everything up. docker-compose up -d\n\nThat’s it. You have a fully functional, encrypted survey platform.\n\nThe goal of this project was to make self-hosting as straightforward as possible. You don’t need to be a systems administrator to get this running. You simply pull down the repository, edit a couple of text files, and run a single command. Docker Compose handles the rest, building and connecting all the containers automatically."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Technical Preview of a Self-Hosted Survey Platform: SurveyDown",
+    "section": "Welcome",
+    "text": "Welcome\nAbout me\n\nJason Locklin\nData Science Lead\nToronto Catholic District School Board\n\n\nGood morning, everyone. My name is Jason Locklin, and I’m the Data Science Lead at the Toronto Catholic District School Board. I’m excited to be here today to talk about a project that I believe has significant potential for all of us in Ontario’s education sector. My goal is to give you a technical preview of a self-hosted survey platform called surveydown."
+  }
+]
