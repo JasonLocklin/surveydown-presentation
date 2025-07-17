@@ -36,7 +36,9 @@ surveys using `R`, `Quarto`, `Shiny`, and a `PostgreSQL` database.
 
 ## The Foundation: What is Quarto?
 
-Quarto is a program that produces documents that can include code from R and other languages. This is a Quarto document!
+Quarto is a program that produces documents that can include code from R and other languages. 
+
+This is a Quarto document!
 
 
 
@@ -64,7 +66,7 @@ Shiny is an R package that builds interactive web applications *directly from R*
 Before we can talk about `surveydown`, we need to understand its engine: Shiny. For those who haven't used it, Shiny is a powerful package from Posit that allows us to build interactive web applications without leaving the R environment we're comfortable with. It's what takes our data analysis and turns it into a tool that others can use, and it's the magic that will power our live surveys.
 :::
 
-## The Bridge: What is `surveydown`?
+## What is `surveydown`?
 
 `surveydown` is an R package that hosts surveys.
 
@@ -100,7 +102,7 @@ Based on their blog and documentation, the authors of `surveydown` have a clear 
 
 -   The package should be considered alpha software, with frequent updates.
 -   The official documentation focuses on free cloud deployment (e.g., shinyapps.io, Supabase).
--   **This is where my project comes in:** to provide a straightforward path to *self-hosting*.
+
 
 ::: {.notes}
 `surveydown` is a young but rapidly maturing project. It's being actively developed, with the authors recently releasing a major update that improved the underlying architecture. While their excellent documentation primarily focuses on using cloud services for hosting, my project aims to fill a gap by providing a clear, reproducible pattern for self-hosting on our own infrastructure.
@@ -110,10 +112,10 @@ Based on their blog and documentation, the authors of `surveydown` have a clear 
 
 For school boards, this isn't just a technical decision—it's a strategic one.
 
--   **Data Governance & Sovereignty:** 
--   **Cost Savings:** 
--   **Customization & Collaboration:** 
--   **No Vendor Lock-in:** 
+-   **Data Governance & Sovereignty** 
+-   **Cost Savings** 
+-   **Customization & Collaboration** 
+-   **No Vendor Lock-in** 
 
 ::: {.notes}
 So, why go to the trouble of self-hosting? The reasons are compelling for us in school boards. It's about data sovereignty and security—keeping our sensitive data on our own servers. It's about significant cost savings over commercial platforms. And it's about control—the freedom to customize our tools and avoid being locked into a specific vendor's ecosystem.
@@ -290,7 +292,7 @@ Three steps to a running survey platform:
     `git clone https://github.com/JasonLocklin/surveydown-container-server`
 3.  **Edit a few configuration files** to set your domain name and passwords.
 4.  **Run one command** to start everything up.
-    `docker-compose up -d`
+    `docker compose up -d --build`
 
 
 ::: {.notes}
