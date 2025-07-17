@@ -26,7 +26,7 @@ Good morning, everyone. My name is Jason Locklin, and I'm the Data Science Lead 
 
 ## Section 1: What is `surveydown`?
 
-Surveydown is n open-source, markdown-based platform for programmable and reproducible
+Surveydown is an open-source platform for programmable and reproducible
 surveys using `R`, `Quarto`, `Shiny`, and a `PostgreSQL` database. 
 
 - Helveston J, Hu P, Bunea B (2024). _surveydown: Markdown-Based Surveys Using
@@ -36,16 +36,17 @@ surveys using `R`, `Quarto`, `Shiny`, and a `PostgreSQL` database.
 
 ## The Foundation: What is Quarto?
 
-Quarto is a program produced by Posit that produces documents that can include
-code from R and other languages. 
+Quarto is a program that produces documents that can include code from R and other languages. This is a Quarto document!
 
-You may have used `knitr` in R to produce RMarkdown
-notebooks. Quarto is a stand-alone replacement that can run independently of R.
+
 
 ::: {.notes}
 Note that the syntax for Quarto is only slightly changed from Rmarkdown and it's 
 easy to convert documents. Quarto can produce all sorts of document types, and
 can be used for general writing as well as literate programming of analyses.
+
+You may have used `knitr` in R to produce RMarkdown
+notebooks. Quarto is a stand-alone replacement that can run independently of R.
 
 These documents, however, are not interactive on their own.
 :::
@@ -65,11 +66,11 @@ Before we can talk about `surveydown`, we need to understand its engine: Shiny. 
 
 ## The Bridge: What is `surveydown`?
 
-`surveydown` is an R package that acts as a bridge, connecting a simple document to a powerful interactive system.
+`surveydown` is an R package that hosts surveys.
 
 - You write a Quarto document with questions
 - Shiny runs the application for interactivity on the web
-- Data is collected in the database, and you export that for analysis
+- Data is collected in a database
 
 
 
@@ -98,7 +99,6 @@ Based on their blog and documentation, the authors of `surveydown` have a clear 
 ## `surveydown`: Development Status
 
 -   The package should be considered alpha software, with frequent updates.
--   A recent major update (v0.3.0) redesigned the app architecture for better performance and flexibility.
 -   The official documentation focuses on free cloud deployment (e.g., shinyapps.io, Supabase).
 -   **This is where my project comes in:** to provide a straightforward path to *self-hosting*.
 
@@ -236,7 +236,6 @@ Think of a container like a standardized shipping container for software.
 
 -   It packages an application and **all its dependencies** (R, packages, system libraries) into one neat box.
 -   This "box" runs the same way everywhere: on your laptop, on a server in your board's data center, or in the cloud.
--   It solves the "it works on my machine" problem.
 
 This makes deployment predictable and easy.
 
@@ -246,7 +245,7 @@ So, let's talk about the self-hosting project. The biggest barrier is often the 
 
 ## A Starting Point for Your Board
 
-This project is **not** a final, locked-in product. It's a demonstration and a template.
+This project is **not** a final product. It's a demonstration and a template.
 
 1.  **For You:** Easily and cheaply demonstrate a fully working on-premise `surveydown` instance to your colleagues and leadership.
 2.  **For Your IT Department:** A clear, working template they can adapt for production. It shows exactly what components are needed and how they connect.
@@ -259,15 +258,17 @@ It's crucial to understand what this project is and isn't. It's not a rigid, one
 
 The components in this project are "pluggable." You can swap them out to match your board's infrastructure.
 
-1. Included `PostgreSQL` database container pre-configured to work with `surveydown`
-2. Included web server with TLS (`https://your_address.com`) security and a download data url.
-3. A Dockerfile that builds a full-featured shiny server instance.
+1. Included `PostgreSQL` database pre-configured to work with `surveydown`
+2. Included web server with TLS (`https://your_address.com`) encryption and a download data url.
+3. A Dockerfile that builds a full-featured shiny server.
 
 
-The **Shiny Server container** is the most valuable piece. You can use it to host most *any* Shiny app, not just `surveydown`.
+
 
 ::: {.notes}
-This template is designed to be flexible. As this diagram shows, the core component is the Shiny Server container. This is the most valuable part of the package. The other parts—the Caddy web server and the PostgreSQL database—are included for convenience to make a complete, working demo. However, your IT department can easily swap these out. They can use their existing enterprise web server and connect the Shiny Server to a central database. The Shiny container itself is a reusable asset for hosting any Shiny application your team develops.
+The **Shiny Server container** is the most valuable piece. You can use it to host most *any* Shiny app, not just `surveydown`.
+
+This template is designed to be flexible. The core component is the Shiny Server container. This is the most valuable part of the package. The other parts—the Caddy web server and the PostgreSQL database—are included for convenience to make a complete, working demo. However, your IT department can easily swap these out. They can use their existing enterprise web server and connect the Shiny Server to a central database. The Shiny container itself is a reusable asset for hosting any Shiny application your team develops.
 :::
 
 ## Additional details
@@ -275,8 +276,9 @@ This template is designed to be flexible. As this diagram shows, the core compon
 The shiny server container also:
 
 - Is preconfigured to host the `surveydown` templates at `/templates` for testing
-- Can be configured to download and host any survey from githum at `/survey`
+- Can be configured to download and host any survey from github at `/survey`
 - Periodically saves the data in a password protected location `/data-export` that can be read directly with R.
+
 
 
 ## Minimal steps to get started
@@ -295,6 +297,14 @@ Three steps to a running survey platform:
 The goal of this project was to make self-hosting as straightforward as possible. You don't need to be a systems administrator to get this running. You simply pull down the repository, edit a couple of text files, and run a single command. Docker Compose handles the rest, building and connecting all the containers automatically.
 :::
 
+
+## Lets try it
+
+Fill out the survey (it's just for fun! data is public):
+
+- [https://shiny.locklin.science/survey](https://shiny.locklin.science/survey)
+
+
 ## Live Demo
 
 I have this setup running right now on a **$5/month** virtual private server from OVH in Montreal.
@@ -308,6 +318,8 @@ To demonstrate how practical this is, I have a live demo running on a very low-c
 
 Note that: the templates are individual applications and take a *long* time to start the first time they are opened on the server.
 :::
+
+
 
 ## The Future Potential
 
@@ -333,3 +345,18 @@ So, what's the big picture? I envision boards using their existing on-premise in
 ::: {.notes}
 That concludes my technical preview. I hope this has given you a sense of what's possible with `surveydown` and a self-hosted approach. I'd be happy to answer any questions you have.
 :::
+
+# Errata: Read the survey data with R
+The demo survey data can be read with:
+
+````r
+
+library(httr2)
+library(arrow)
+
+resp <- request("https://shiny.locklin.science/data-export/responses_latest.parquet") |>
+  req_auth_basic("data", "defaultpassword") |>
+  req_perform()
+
+df <- read_parquet(rawConnection(resp$body))
+````
